@@ -1,7 +1,7 @@
 #PACKAGES IN R#################################################
 if(!require("pacman"))install.packages("pacman")
 pacman::p_load(pacman,party,psych,rio,tidyverse)
-#DATASETS ####################################################
+#DATASETS IN R####################################################
 library(tidyverse)
 library(datasets)
 iris
@@ -55,18 +55,18 @@ df <-diamonds %>%
   select(color, clarity) %>%
   table() %>%
   print()  #show table in console
-#stacked bar: step 1: create graph 
+#stacked bar ####################################################e
 df %>%
   barplot(legend = rownames(.)) #drawplot with  legend
 
-#side by side bar
+#side by side bar#######################################################
 df%>%
   barplot(
     legend = rownames(.), #dot is a placeholder for pipe
     beside = T # put bars next to beach other
   )
 
-#HISTOGRAM ###################################################
+#HISTOGRAM ###########################################################
 ?diamonds
 hist(diamonds$price)
 
@@ -80,10 +80,9 @@ hist(diamonds$price,
      col = "#CD0000"
      )
 
-#BOX PLOT ####################################################
+#BOX PLOT ##########################################################
 boxplot(diamonds$price)
  
-
 diamonds %>%
   select(price) %>%
   boxplot(
@@ -112,7 +111,7 @@ df %>%
 df %>%
   select(scrapbook:modernDance) %>%
   plot()
-#fancy 
+#fancy version
 df %>%
   select(scrapbook:modernDance) %>%
   plot(
@@ -278,7 +277,7 @@ describe(df)
 
 # correlations 
 df <- df %>%
-  as_tibble() %>%
+  as_tibble() %>%    #coerce list/matrix to data frame
   select(instagram:modernDance) %>%
   print()
 
