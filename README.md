@@ -1,1 +1,1 @@
-This is the code from Learning R 2019.
+This is my notes on R based on multiple courses 
