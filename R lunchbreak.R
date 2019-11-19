@@ -90,4 +90,85 @@ i.am.a.list<-list(bob=c(6.2,150),bill=c(5.4,110))
 names(i.am.a.list)  #bob and bill 
 i.am.a.list$bob  #directly give you the value 
 
+###DATA TYPE: FACTOR ########################################
+i.am.a.vector<-c("blue","black","green","white","black","blue","blue")
+i.am.a.factor<-factor(i.am.a.vector)  #only unique value
+levels(i.am.a.factor)   
+levels(i.am.a.factor)<-c("negro","azul","verde","blanco")
+table(i.am.a.factor)
+nlelves(i.am.a.factor)
+barplot(table(i.am.a.factor))
+levels(ordered(i.am.a.factor))
+#sorted by integer value assocaite with name
+sum(table(factor(i.am.a.vector,exclude = "blue")))
+#factors are unique, stored as integers 
+####DATA TYPE: MATRIX #################################
+i.am.a.vector <-c("twas","brilling","and","the","slithey","toves")
+i.am.a.matrix<-matrix(i.am.a.vector,nrow=2,ncol=3)
+i.am.a.matrix
+i.am.a.matrix[2,3]
+dim(i.am.a.matrix)
+i.am.a.matrix <-matrix(i.am.a.vector,nrow=2,ncol=3,byrow=T)
+i.am.a.matrix
+lots.of.letters <- c(letters[1:10],LETTERS[1:10])
+letter.matrix <-matrix(lots.of.letters,ncol=2,dimnames=list(c(),c("lowercase","UPPERCASE")))
+letter.matrix
+#transpose
+letter.matrix <-matrix(lots.of.letters,nrow=2,dimnames=list(c("lowercase","UPPERCASE"),c()))
+letter.matrix
+#transpose shortcut
+matrix.transposed<-t(i.am.a.matrix)
+matrix.transposed
+matrix.transposed[3,2]
 
+
+#####DATA TYPE: ARRAY#######################
+# a matrix is two dimensionally array 
+i.am.a.vector <- c("twas","brillig","and","the","slithey","toves","did","gyre","and","gimble","in","the","wabe")
+i.am.an.array <- array(i.am.a.vector,c(2,3,2)) #2 rows, 3 column,3levels(tables)
+i.am.an.array
+i.am.an.array[2,3,2]  #2nd roll, 3rd column, 2nd level
+i.am.an.array[2,3,2] <- "a new value" #assign value to position
+i.am.an.array
+i.am.an.array[2,,2] #second roll, secondlevel 
+
+#####DATA TYPE: DATAFRAME##########################
+#  a spreadsheets, colums=variables, rows: observations
+#list must contain equal number of columns
+i.am.a.vector <-c(1:6)
+i.am.also.a.vector <- c("twas","brillig","and","the","slithey","toves")
+many.months <-month.abb[1:6]  #constant built into R 
+i.am.a.dataframe <- data.frame(i.am.a.vector,i.am.also.a.vector,many.months)
+i.am.a.dataframe
+#vectors need to have identical length
+i.am.a.dataframe[2,3]
+str(i.am.a.dataframe)
+i.am.a.dataframe <- data.frame(i.am.a.vector,I(many.months),row.names=i.am.also.a.vector)
+#I is inhibit command, inhibiting many months from converting to factor 
+str(i.am.a.dataframe)
+#AsIs = a cluster 
+
+#######ORDERMERGER###########################
+data("ChickWeight") #brings into enviroment 
+ChickWeight$weight  # gives unsorted list 
+sort(ChickWeight$weight)  #sorted vector, not factor
+order(ChickWeight$weight)  # strange unsorted 
+# values of chickweight sorted, return observation number 
+
+ChickWeight[196,] # the 196 roll 
+ChickWeight[order(ChickWeight$weight),] 
+#pull in all the columns 
+chick.one <- ChickWeight[ChickWeight$Chick ==1,]
+chick.two <- ChickWeight[ChickWeight$Chick == 2,]
+View(chick.one)
+View(chick.two)
+# two data sets, we want to merge
+match.time.obs <- merge(chick.one,chick.two,by="Time")
+View(match.time.obs) #sidebyside 
+
+source("chicknames.R") #wrong 
+# not in loacal working directory
+#use the panel on the right to set working directory 
+source("chicknames.R")
+# to merge
+chick_names<-merge(ChickWeight,chicknames,by.x="Chick",by.y="rank")
